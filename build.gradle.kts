@@ -17,12 +17,6 @@ allprojects {
 
 }
 
-subprojects {
-
-    apply(plugin = "maven")
-
-}
-
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
