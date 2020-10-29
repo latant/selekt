@@ -161,4 +161,4 @@ Advantages:
 - The queries are transparent and explain the structure of the data well.
 - There is no need to write additional code, the mapping code is generated.
 - The encoder can directly serialize the data without storing it first.
-- The queries have type, that contain schematic information about the data produced by it. (e.g. to create [Swagger model](https://swagger.io/docs/specification/data-models/))
+- The queries have type, that contain schematic information about the data produced by it. (e.g. for generating [Swagger model](https://swagger.io/docs/specification/data-models/))
