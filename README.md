@@ -155,9 +155,9 @@ fun Person.deeplyNestedData() = query(encoder) {
 }
 ```
 
-This solution:
-- is type-safe
-- keeps the code maintainable. For example, when we change Person's birth property's type to String, the queries don't break.
-- the queries are transparent and explain the structure of the data well.
-- there is no need to write additional code, the mapping code generated.
+Advantages:
+- The queries are typesafe type-safe
+- The code is more maintainable. If Person's birth property's type is changed to String, the queries don't break.
+- The queries are transparent and explain the structure of the data well.
+- There is no need to write additional code, the mapping code generated.
 - The encoder can directly serialize the data without storing it first.
