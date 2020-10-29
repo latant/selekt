@@ -6,8 +6,8 @@ plugins {
     maven
 }
 
-group = "io.selekt"
-version = "0.0.1"
+group = "com.github.latant"
+version = "0.1.1"
 
 allprojects {
     repositories {
