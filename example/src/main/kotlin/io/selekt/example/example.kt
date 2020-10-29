@@ -11,68 +11,79 @@ import java.nio.charset.Charset
 data class Person(
     val name: String,
     val birth: Int,
-    val moviesActed: Sequence<Movie>,
+    val moviesActed: List<Movie>,
+    val moviesDirected: List<Movie>,
+    val moviesProduced: List<Movie>,
     val followers: List<Person>,
-    val a: List<List<Person>> = listOf(),
-    val b: IntArray = IntArray(5),
-    val c: Array<Person> = emptyArray(),
-)
+    val peopleFollowed: List<Person>,
+) {
+    val movieTitles get() = moviesActed.map { it.title }
+}
 
 @Queryable
 data class Movie(
     val title: String,
     val tagline: String,
     val released: Int,
-    val directors: List<Person>,
-    val actors: List<Person>
+    val director: Person,
+    val writer: Person,
+    val producer: Person,
+    val actors: List<Person>,
 )
 
-fun main() {
-    val q = personQuery {
+val encoder = JacksonJsonEncoder(JsonFactory.builder().build())
+
+fun Person.toDetailsJson() = query(encoder) {
+    name()
+    birth()
+}
+
+fun Person.toActorDetailsJson() = query(encoder) {
+    name()
+    birth()
+    moviesActed {
+        title()
+    }
+    peopleFollowed {
         name()
         birth()
-        moviesActed {
-            title()
-            tagline()
-            directors {
-                name()
-                moviesActed {
-                    title()
+    }
+}
+
+fun Movie.toDetailsJson() = query(encoder) {
+    title()
+    tagline()
+    released()
+    director {
+        name()
+        birth()
+    }
+    producer {
+        name()
+        birth()
+    }
+    actors {
+        name()
+        birth()
+    }
+}
+
+fun Person.deeplyNestedData() = query(encoder) {
+    name()
+    birth()
+    followers {
+        name()
+        peopleFollowed {
+            name()
+            moviesActed {
+                actors {
+                    moviesDirected {
+                        title()
+                    }
                 }
             }
         }
     }
-    val p = Person("Anti", 1997, sequenceOf(Movie("Goal", "legjobb", 2000, listOf(), listOf())), listOf())
-    val e = GeneralObjectEncoder()
-    val j = JacksonJsonEncoder(JsonFactory.builder().build())
-    println(p.query(j) {
-        name()
-        birth()
-        moviesActed {
-            title()
-            tagline()
-            directors {
-                name()
-                moviesActed {
-                    title()
-                }
-            }
-        }
-    })
-    println(p.query(e) {
-        name()
-        birth()
-        moviesActed {
-            title()
-            tagline()
-            directors {
-                name()
-                moviesActed {
-                    title()
-                }
-            }
-        }
-    })
 }
 
 class JacksonJsonEncoder(private val factory: JsonFactory) : Encoder<String> {
