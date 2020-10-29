@@ -16,9 +16,7 @@ data class Person(
     val moviesProduced: List<Movie>,
     val followers: List<Person>,
     val peopleFollowed: List<Person>,
-) {
-    val movieTitles get() = moviesActed.map { it.title }
-}
+)
 
 @Queryable
 data class Movie(
