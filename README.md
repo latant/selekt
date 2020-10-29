@@ -94,7 +94,7 @@ Since we are using a concise language like Kotlin, writing it is not a huge pain
 
 ### Solution
 
-***selekt*** generates [type-safe DSL](https://kotlinlang.org/docs/reference/type-safe-builders.html)-s for the classes that are annotated them with `@Queryable` and can be used as follows.
+***selekt*** generates [type-safe DSL](https://kotlinlang.org/docs/reference/type-safe-builders.html)-s for the classes that are annotated with `@Queryable` and can be used as follows.
 
 ```kotlin
 fun Person.toDetailsJson() = query(encoder) {
