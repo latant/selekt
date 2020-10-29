@@ -1,11 +1,11 @@
 # selekt
 
-A tool for mapping Kotlin objects to trees, inspired by GraphQL.
+A tool for mapping Kotlin objects to trees, inspired by [GraphQL](https://graphql.org/).
 
 ## Purpose
 
 A usual use-case is when we provide different views of the same data for different clients.
-One proven solution is to create different [DTO](https://en.wikipedia.org/wiki/Data_transfer_object]-s])-s that model the same business entity, with certain details included of it. Most of the cases, the definitions are duplicated, while the main purpuse of their existence is to ***selekt*** the needed parts of the original data.
+One proven solution is to create different [DTO](https://en.wikipedia.org/wiki/Data_transfer_object)-s that model the same business entity, with certain details included of it. Most of the cases, the definitions are duplicated, while the main purpuse of their existence is to ***selekt*** the needed parts of the original data.
 
 ### Example
 
@@ -94,7 +94,7 @@ Since we are using a concise language like Kotlin, writing it is not a huge pain
 
 ### Solution
 
-***selekt*** generates type-safe DSL-s for the classes that are annotated them with `@Queryable` and can be used as follows.
+***selekt*** generates [type-safe DSL](https://kotlinlang.org/docs/reference/type-safe-builders.html)-s for the classes that are annotated them with `@Queryable` and can be used as follows.
 
 ```kotlin
 fun Person.toDetailsJson() = query(encoder) {
