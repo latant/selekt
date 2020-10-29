@@ -6,13 +6,16 @@ plugins {
     maven
 }
 
-group = "com.github.latant"
-version = "0.1.1"
 
 allprojects {
+
+    group = "com.github.latant"
+    version = "0.1.1"
+
     repositories {
         mavenCentral()
     }
+
 }
 
 tasks.withType<KotlinCompile> {
