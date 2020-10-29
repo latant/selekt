@@ -5,7 +5,6 @@ plugins {
     kotlin("kapt") version "1.4.10"
 }
 
-
 allprojects {
 
     group = "com.github.latant"
