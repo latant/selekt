@@ -17,13 +17,14 @@ import javax.tools.Diagnostic
 lateinit var typeUtils: Types
 
 @AutoService(Processor::class)
-@SupportedSourceVersion(SourceVersion.RELEASE_13)
-@SupportedAnnotationTypes("io.selekt.Queryable")
-@SupportedOptions("kapt.kotlin.generated")
 class QueryableProcessor : AbstractProcessor() {
 
     fun warn(msg: Any) = processingEnv.messager.printMessage(Diagnostic.Kind.WARNING, msg.toString())
     fun error(msg: Any) = processingEnv.messager.printMessage(Diagnostic.Kind.ERROR, msg.toString())
+
+    override fun getSupportedOptions() = setOf("kapt.kotlin.generated")
+    override fun getSupportedAnnotationTypes() = setOf(Queryable::class.qualifiedName)
+    override fun getSupportedSourceVersion() = SourceVersion.RELEASE_13
 
     override fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean {
         typeUtils = processingEnv.typeUtils
