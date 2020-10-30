@@ -1,11 +1,7 @@
 package io.selekt.example
 
-import com.fasterxml.jackson.core.JsonFactory
-import io.selekt.*
-import java.io.StringWriter
-import java.math.BigInteger
-import java.nio.ByteBuffer
-import java.nio.charset.Charset
+import io.selekt.Exclude
+import io.selekt.Queryable
 
 @Queryable
 data class Person(
@@ -25,10 +21,12 @@ data class Movie(
     val released: Int,
     val director: Person,
     val writer: Person,
-    val producer: Person,
-    val actors: List<Person>,
+    val producer: Person?,
+    @Exclude
+    val actors: List<Person?>,
 )
 
+/*
 val encoder = JacksonJsonEncoder(JsonFactory.builder().build())
 
 fun Person.toDetailsJson() = query(encoder) {
@@ -121,3 +119,4 @@ class JacksonJsonEncoder(private val factory: JsonFactory) : Encoder<String> {
 
 }
 
+*/

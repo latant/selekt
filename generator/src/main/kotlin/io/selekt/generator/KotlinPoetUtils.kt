@@ -1,4 +1,4 @@
-package io.selekt
+package io.selekt.generator
 
 import com.squareup.kotlinpoet.*
 import java.io.File
@@ -8,8 +8,8 @@ import java.io.File
 annotation class KotlinPoetDsl
 
 private typealias FileSpecBuild = (@KotlinPoetDsl FileSpec.Builder).() -> Unit
-private typealias TypeSpecBuild = (@KotlinPoetDsl TypeSpec.Builder).() -> Unit 
-private typealias PropSpecBuild = (@KotlinPoetDsl PropertySpec.Builder).() -> Unit 
+private typealias TypeSpecBuild = (@KotlinPoetDsl TypeSpec.Builder).() -> Unit
+private typealias PropSpecBuild = (@KotlinPoetDsl PropertySpec.Builder).() -> Unit
 private typealias FunSpecBuild = (@KotlinPoetDsl FunSpec.Builder).() -> Unit
 private typealias ParamSpecBuild = (@KotlinPoetDsl ParameterSpec.Builder).() -> Unit
 

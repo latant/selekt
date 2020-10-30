@@ -126,7 +126,6 @@ class ArrayQuery<V>(private val query: Query<V>): ValueQuery<Array<V>>() {
     override fun toString() = "[$query]"
 }
 
-
 object AnyQuery : ValueQuery<Any>() {
     override fun execute(encoder: Encoder<*>, value: Any) = encoder.any(value)
 }

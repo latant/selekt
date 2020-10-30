@@ -1,8 +1,12 @@
-package io.selekt
+package io.selekt.generator
 
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.KModifier.PRIVATE
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import io.selekt.Encoder
+import io.selekt.MapQuery
+import io.selekt.Query
+import io.selekt.QueryDsl
 
 fun ClassName.builderClassName() = ClassName(packageName, "${simpleName}QueryBuilder")
 
@@ -50,7 +54,7 @@ fun generateBuilder(generatedSourcesRoot: String, model: BuilderModel) {
             companionObject {
                 function("build") {
                     val buildQuery = parameter("buildQuery", builderLambdaTypeName)
-                    returns(queryTypeName)
+                    returns(mapQueryTypeName)
                     addStatement("return %T(%T().apply(%N).queries)", mapQueryTypeName, builderClassName, buildQuery.name)
                 }
             }
