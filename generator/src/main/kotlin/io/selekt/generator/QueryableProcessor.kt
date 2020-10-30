@@ -24,7 +24,7 @@ class QueryableProcessor : AbstractProcessor() {
 
     override fun getSupportedOptions() = setOf("kapt.kotlin.generated")
     override fun getSupportedAnnotationTypes() = setOf(Queryable::class.qualifiedName)
-    override fun getSupportedSourceVersion() = SourceVersion.RELEASE_13
+    override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
 
     override fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean {
         typeUtils = processingEnv.typeUtils
