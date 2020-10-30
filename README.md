@@ -1,6 +1,6 @@
 # selekt
 
-A tool for mapping Kotlin objects to trees, inspired by [GraphQL](https://graphql.org/).
+An internal DSL-generator tool for mapping Kotlin objects to trees, inspired by [GraphQL](https://graphql.org/).
 
 ## Getting Started
 
