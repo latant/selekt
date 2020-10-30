@@ -32,10 +32,7 @@ class KtType(val kmType: KmType, val typeMirror: TypeMirror, val isNullable: Boo
     val className: String = (kmType.classifier as? KmClassifier.Class)?.name?.replace('/', '.')
         ?: error("Generics and aliases are not supported.")
     val argumentTypes get() = (kmType.arguments zip (typeMirror as DeclaredType).typeArguments)
-        .map { (kmt, tm) ->
-            val mirrors = tm.annotationMirrors
-            kmt.type?.let { KtType(it, tm, false) }
-        }
+        .map { (kmt, tm) -> kmt.type?.let { KtType(it, tm, false) } }
     val queryableAnnotation: Queryable? get() = (typeMirror as? DeclaredType)?.asElement()?.getAnnotation()
 }
 
@@ -61,6 +58,5 @@ fun queryModel(type: KtType): QueryModel {
     val model = models[type.className]?.invoke(type)
         ?: type.queryableAnnotation?.let { QueryModel.Queryable(ClassName.bestGuess(type.className)) }
         ?: QueryModel.Primitive(AnyQuery::class.asTypeName())
-    val isNullable = type.isNullable
     return if (type.isNullable) QueryModel.Wrapping(NullableQuery::class.asTypeName(), model) else model
 }
