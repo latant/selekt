@@ -2,12 +2,34 @@
 
 A tool for mapping Kotlin objects to trees, inspired by [GraphQL](https://graphql.org/).
 
+## Getting Started
+
+#### Example Gradle configuration
+
+```kotlin
+plugins {
+    kotlin("jvm") version "1.4.10"
+    kotlin("kapt") version "1.4.10"
+}
+
+repositories {
+    mavenCentral()
+    maven("https://jitpack.io")
+}
+
+dependencies {
+    implementation(kotlin("stdlib"))
+    implementation("com.github.latant.selekt:core:0.1.16")
+    kapt("com.github.latant.selekt:generator:0.1.16")
+}
+```
+
 ## Purpose
 
 A usual use-case is when we provide different views of the same data for different clients.
 One proven solution is to create different [DTO](https://en.wikipedia.org/wiki/Data_transfer_object)-s that model the same business entity, with certain details included of it. Most of the cases, the definitions are duplicated, while the main purpuse of their existence is to ***selekt*** the needed parts of the original data.
 
-### Example
+#### Example
 
 The following classes are the domain model.
 
@@ -92,7 +114,7 @@ Since we are using a concise language like Kotlin, writing it is not a huge pain
 
 ***selekt*** aims to solve all these problems.
 
-### Solution
+#### Solution
 
 ***selekt*** generates [type-safe DSL](https://kotlinlang.org/docs/reference/type-safe-builders.html)-s for the classes that are annotated with `@Queryable` and can be used as follows.
 
