@@ -1,7 +1,14 @@
 package io.selekt.example
 
+import com.fasterxml.jackson.core.JsonFactory
+import io.selekt.Encoder
 import io.selekt.Exclude
 import io.selekt.Queryable
+import io.selekt.array
+import java.io.StringWriter
+import java.math.BigInteger
+import java.nio.ByteBuffer
+import java.nio.charset.Charset
 
 @Queryable
 data class Person(
@@ -26,7 +33,7 @@ data class Movie(
     val actors: List<Person?>,
 )
 
-/*
+
 val encoder = JacksonJsonEncoder(JsonFactory.builder().build())
 
 fun Person.toDetailsJson() = query(encoder) {
@@ -58,10 +65,6 @@ fun Movie.toDetailsJson() = query(encoder) {
         name()
         birth()
     }
-    actors {
-        name()
-        birth()
-    }
 }
 
 fun Person.deeplyNestedData() = query(encoder) {
@@ -72,11 +75,7 @@ fun Person.deeplyNestedData() = query(encoder) {
         peopleFollowed {
             name()
             moviesActed {
-                actors {
-                    moviesDirected {
-                        title()
-                    }
-                }
+                title()
             }
         }
     }
@@ -118,5 +117,3 @@ class JacksonJsonEncoder(private val factory: JsonFactory) : Encoder<String> {
     override fun nil() = generator.writeNull()
 
 }
-
-*/
